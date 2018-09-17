@@ -1,0 +1,16 @@
+支付宝支付：
+    先导入alipay的java SDK
+	    <dependency>
+			<groupId>com.alipay.sdk</groupId>
+			<artifactId>alipay-sdk-java</artifactId>
+			<version>3.3.49.ALL</version>
+		</dependency>
+    导入fastjson 方便操作json数据
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
+		</dependency>
+
+    支付宝下次流程参考官方文档，这里需要注意的是 公钥不是对应的私钥，而是将公钥录入蚂蚁金服平台的应用公钥，然后在获取支付宝公钥

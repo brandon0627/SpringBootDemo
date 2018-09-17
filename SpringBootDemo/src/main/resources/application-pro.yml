@@ -1,0 +1,44 @@
+server:
+  port: 8081
+  context-path: /brandon
+spring:
+  file:
+    uploadPath: /home/image/
+    uploadTempPath: /tmp/image/
+  #文件路径配置
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/,classpath:/public/,file:/${file.uploadPath}
+  #文件上传大小
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  #datasource
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: mysql://127.0.0.1:3306/dmy?useSSL=true
+    data-username:
+    data-password:
+  #redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 3000
+#debug: true
+
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+#  path: E:/log/
+#  file: E:/log/log.log
+#  level: info
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

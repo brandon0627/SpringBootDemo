@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- 文件输出格式 -->
+	<property name="PATTERN"
+		value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
+	<!-- test文件路径 -->
+	<!-- <property name="TEST_FILE_PATH" value="C:/log/logs" /> -->
+	<!-- pro文件路径 -->
+	<!-- <property name="PRO_FILE_PATH" value="/home/huawang/log/logs" /> -->
+
+	<!-- 开发环境 -->
+	<springProfile name="dev,test">
+		<appender name="CONSOLE"
+			class="ch.qos.logback.core.ConsoleAppender">
+			<encoder>
+				<pattern>${PATTERN}</pattern>
+			</encoder>
+		</appender>
+
+		<logger name="com.*" level="info" />
+
+		<root level="info">
+			<appender-ref ref="CONSOLE" />
+		</root>
+	</springProfile>
+
+	<!-- 测试环境 -->
+	<!--按天生成日志 -->
+	<springProfile name="dev,test">
+		<!-- 每天产生一个文件 -->
+		<appender name="TEST-FILE"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<rollingPolicy
+				class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<FileNamePattern>C:/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}.log
+				</FileNamePattern>
+				<MaxHistory>30</MaxHistory>
+			</rollingPolicy>
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<Pattern>${PATTERN} </Pattern>
+			</layout>
+		</appender>
+
+		<root level="info">
+			<appender-ref ref="TEST-FILE" />
+		</root>
+	</springProfile>
+
+	<!-- 正式环境 -->
+	<springProfile name="pro">
+		<appender name="PROD_FILE"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<rollingPolicy
+				class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>/home/huawang/log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}.log
+				</fileNamePattern>
+				<MaxHistory>30</MaxHistory>
+			</rollingPolicy>
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>${PATTERN}</pattern>
+			</layout>
+		</appender>
+		<root level="info">
+			<appender-ref ref="PROD_FILE" />
+		</root>
+	</springProfile>
+</configuration>
